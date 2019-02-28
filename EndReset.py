@@ -1,10 +1,11 @@
+#!/usr/bin/python3.6
 import nbt
 import logging
 import os
 import glob
 
 numFound = False
-logging.basicConfig(filename='script.log', level=logging.DEBUG)
+logging.basicConfig(filename='//home//minecraft//multicraft//servers//server1//process//script.log', level=logging.DEBUG)
 
 # Level.dat
 logging.info('Reading DIM1/level.dat')
@@ -23,8 +24,8 @@ for i in range(0,19):
     if(not numFound):
         end_dat['Data']['DimensionData']['1']['DragonFight']['Gateways'].tags.append(nbt.nbt.TAG_Int(value=i))
 # Reset Dragon
-logging.info('Resetting Dragon...')
-end_dat['Data']['DimensionData'].clear()
+#logging.info('Resetting Dragon...')
+#end_dat['Data']['DimensionData'].clear()
 #end_dat['Data']['DimensionData']['1']['DragonFight']['DragonKilled'].value = 0
 #end_dat['Data']['DimensionData']['1']['DragonFight']['PreviouslyKilled'].value = 0
 #end_dat['Data']['DimensionData']['1']['DragonFight']['DragonUUIDLeast'].value = 0
@@ -55,7 +56,7 @@ for file in glob.glob("*.mca"):
                         chunk.write_file('current.%d.%d.nbt' % (chunk.loc.x, chunk.loc.z))
                         current_file = nbt.nbt.NBTFile('current.%d.%d.nbt' % (chunk.loc.x, chunk.loc.z))
                         region.write_chunk(x=chunk.loc.x, z=chunk.loc.z, nbt_file=current_file)
-                        os.remove(current_file)
+                        os.remove('current.%d.%d.nbt' % (chunk.loc.x, chunk.loc.z))
     region.close()
 for file in glob.glob("*.mca"):
     # Test Regions
